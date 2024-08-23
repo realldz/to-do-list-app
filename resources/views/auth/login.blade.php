@@ -19,7 +19,7 @@
         </div>
         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
         <div class="mt-1">
-            <span>Don't have account? <a href="#">Register</a></span>
+            <span>Don't have account? <a href="{{ route('auth.register') }}">Register</a></span>
         </div>
     </div>
 @endsection
