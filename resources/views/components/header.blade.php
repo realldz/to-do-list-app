@@ -19,7 +19,7 @@
                 
                 <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Sign out</a></li>
                 </ul>
             </div>
         </div>
