@@ -14,7 +14,7 @@ class AddMissingColumTodo extends Migration
     public function up()
     {
         Schema::table('todos', function (Blueprint $table) {
-            $table->dateTime('date');
+            $table->date('date');
             $table->integer('priority')->unsigned();
         });
     }
