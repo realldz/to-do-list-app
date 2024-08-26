@@ -30,12 +30,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::match(['get', 'post'], 'profile', [UserController::class, 'profile'])->name('profile');
     Route::prefix('task')->name('task.')->group(function () {
+        Route::middleware('owner')->group(function () {
+            Route::get('edit/{task}', [TodoController::class, 'edit'])->name('edit');
+            Route::put('update/{task}', [TodoController::class, 'update'])->name('update');
+            Route::get('markAsDone/{task}', [TodoController::class, 'markAsDone'])->name('markAsDone');
+            Route::delete('delete/{task}', [TodoController::class, 'delete'])->name('delete');
+        });
         Route::get('create', [TodoController::class, 'create'])->name('create');
-        Route::get('edit/{task}', [TodoController::class, 'edit'])->name('edit');
-        Route::put('update/{task}', [TodoController::class, 'update'])->name('update');
         Route::post('store', [TodoController::class, 'store'])->name('store');
-        Route::get('markAsDone/{task}', [TodoController::class, 'markAsDone'])->name('markAsDone');
-        Route::delete('delete/{task}', [TodoController::class, 'delete'])->name('delete');
     });
 });
 
