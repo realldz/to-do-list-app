@@ -13,7 +13,9 @@
                 </div>
             @endif
             @if (Session::get('successMsg'))
-                <p>{{ Session::get('successMsg') }} </p>
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('successMsg') }} 
+            </div>
             @endif
             <div class="form-floating mb-1">
                 <input type="username" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 use Auth;
 use Redirect;
@@ -25,6 +27,25 @@ class AuthController extends Controller
 
     }
     public function register(Request $request) {
+        if ($request->isMethod('POST')) {
+            $validator = Validator::make($request->all(), [
+                'username' => 'required', 
+                'password' => 'required|min:6|confirmed',
+            ]);
+            if ($validator->fails()) {
+                redirect()->back()->withInput()->withErrors($validator->errors());
+            }
+            $user = $validator->validated();
+            if ($user) {
+                User::create([
+                    'username' => $user['username'],
+                    'password' => Hash::make($user['password']),
+                    'is_admin' => 0,
+                ]);
+                return redirect()->route('auth.login')->with('successMsg', 'Account has been created, please login');
+            }
+            return redirect()->back();
+        }
         return view('auth.register');
     }
 }
