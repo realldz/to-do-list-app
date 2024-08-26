@@ -43,6 +43,10 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'admin' => [
+            // \App\Http\Middleware\Authenticate::class,
+            \App\Http\Middleware\isAdmin::class,
+        ],
     ];
 
     /**
@@ -64,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAuth' => \App\Http\Middleware\isAuth::class,
         'owner' => \App\Http\Middleware\VerifyTaskOwner::class,
+        // 'admin' => \App\Http\Middleware\isAdmin::class,
     ];
 }
