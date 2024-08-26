@@ -45,10 +45,11 @@
                         </td>
                     </tr>
                 @endforeach
-
             </tbody>
 
+
         </table>
+        {!! $todos->links() !!}
     </div>
 
 @endsection

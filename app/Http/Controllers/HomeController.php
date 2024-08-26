@@ -7,7 +7,8 @@ use App\Models\Todo;
 class HomeController extends Controller
 {
     public function index(Request $request) {
-        $todos = Todo::all();
+        $todos = Todo::simplePaginate(5);
+        // dd($todos);
         return view('home', [
             'todos' => $todos,
         ]);
