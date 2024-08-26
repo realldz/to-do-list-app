@@ -14,13 +14,12 @@ class AuthController extends Controller
         if (!$request->isMethod('POST')) {
             return view('auth.login');
         }
-        // dd($request->all());
+
         $validator = Validator::make($request->all(), ['username' => 'required', 'password' => 'required']);
         if ($validator->fails()) {
-            redirect()->back()->withInput()->withErrors($validator->errors());
+            return redirect()->back()->withInput()->withErrors($validator->errors());
         }
-        // dd($validator->validated());
-        if (!Auth::attempt($validator->validated())) {
+        if (!Auth::attempt($validator->validated(), $request->input('remember'))) {
             return redirect()->back()->withInput()->withErrors('Username or password is incorrect');
         }
         return redirect()->back();
@@ -33,7 +32,7 @@ class AuthController extends Controller
                 'password' => 'required|min:6|confirmed',
             ]);
             if ($validator->fails()) {
-                redirect()->back()->withInput()->withErrors($validator->errors());
+                return redirect()->back()->withInput()->withErrors($validator->errors());
             }
             $user = $validator->validated();
             if ($user) {
