@@ -12,10 +12,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function success($message) {
-        Response::json(['success' => 'true', 'message' => $message]);
+        return Response::json(['success' => 'true', 'message' => $message]);
     }
     public function fail($message) {
-        Response::json(['success' => 'false', 'message' => $message]);
+        return Response::json(['success' => 'false', 'message' => $message]);
     }
 
 }
