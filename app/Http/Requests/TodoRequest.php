@@ -26,7 +26,8 @@ class TodoRequest extends FormRequest
         return [
             'task_name' => 'required',
             'status' => 'required|boolean',
-            'date' => 'required|date'
+            'date' => 'required|date',
+            'priority' => 'required'
         ];
     }
 }
