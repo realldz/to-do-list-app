@@ -28,6 +28,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::match(['get', 'post'], 'profile', [UserController::class, 'profile'])->name('profile');
     Route::prefix('task')->name('task.')->group(function () {
         Route::get('create', [TodoController::class, 'create'])->name('create');
         Route::get('edit/{task}', [TodoController::class, 'edit'])->name('edit');
