@@ -15,7 +15,7 @@ class Controller extends BaseController
         return Response::json(['success' => 'true', 'message' => $message]);
     }
     public function fail($message) {
-        return Response::json(['success' => 'false', 'message' => $message]);
+        return Response::json(['success' => 'false', 'message' => $message], 400);
     }
 
 }
