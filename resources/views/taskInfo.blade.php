@@ -7,7 +7,7 @@
     @endisset task
 @endsection
 @section('content')
-    <div class="container ">
+    <div class="container">
         <h1>
             @isset($task)
                 Edit
@@ -66,7 +66,7 @@
             $.ajax({
                 method: @isset($task) 'PUT' @else 'POST' @endisset,
                 url: @isset($task) '{{ route('task.update',$task->id) }}' @else '{{ route('task.store') }}' @endisset,
-                dateType: 'json',
+                dataType: 'json',
                 data: {
                     _token: '{{ csrf_token() }}',
                     task_name: $("#task_name").val(),
