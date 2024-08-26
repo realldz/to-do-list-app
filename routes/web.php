@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('auth')->name('auth.')->group(function () {
-    // Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::match(['get', 'post'], 'login', [AuthController::class, 'login'])->name('login');
-    Route::match(['get', 'post'], 'register', [AuthController::class, 'register'])->name('register');
+    Route::middleware('guest')->group(function () {
+        Route::match(['get', 'post'], 'login', [AuthController::class, 'login'])->name('login');
+        Route::match(['get', 'post'], 'register', [AuthController::class, 'register'])->name('register');
+    });
+
     Route::get('logout', function () {
         Auth::logout();
         return redirect()->back();
