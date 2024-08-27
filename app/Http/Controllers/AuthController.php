@@ -37,7 +37,7 @@ class AuthController extends Controller
             }
             $user = $validator->validated();
             if ($user) {
-                if (User::where('username', '=', $user['username'])) {
+                if (User::where('username', '=', $user['username'])->count() > 0) {
                     return redirect()->back()->withErrors('This username already exists');
                 }
                 try {
