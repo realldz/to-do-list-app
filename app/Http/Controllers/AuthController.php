@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Hash;
 use Illuminate\Http\Request;
 use Auth;
@@ -36,11 +37,18 @@ class AuthController extends Controller
             }
             $user = $validator->validated();
             if ($user) {
-                User::create([
-                    'username' => $user['username'],
-                    'password' => Hash::make($user['password']),
-                    'is_admin' => 0,
-                ]);
+                if (User::where('username', '=', $user['username'])) {
+                    return redirect()->back()->withErrors('This username already exists');
+                }
+                try {
+                    User::create([
+                        'username' => $user['username'],
+                        'password' => Hash::make($user['password']),
+                        'is_admin' => 0,
+                    ]);
+                } catch (Exception $e) {
+                    return redirect()->back()->withErrors($e->getMessage());
+                }
                 return redirect()->route('auth.login')->with('successMsg', 'Account has been created, please login');
             }
             return redirect()->back();
