@@ -17,12 +17,11 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-        if ($user) {
-            if ($user->is_admin) {
+        if (Auth::check()) {
+            if (auth()->user()->is_admin) {
                 return $next($request);
             }
         }
-        return redirect()->back();
+        return redirect()->route('index');
     }
 }
