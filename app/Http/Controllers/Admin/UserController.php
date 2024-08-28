@@ -13,6 +13,15 @@ class UserController extends Controller
 {
     public function index(Request $request) {
         $query = User::query();
+        $request->whenFilled('id', function ($id) use ($query) {
+            $query->where('id', 'like', "%{$id}%");
+        });
+        $request->whenFilled('is_admin', function ($is_admin) use ($query) {
+            $query->where('is_admin', $is_admin);
+        });
+        $request->whenFilled('username', function ($username) use ($query) {
+            $query->where('username', 'like', "%{$username}%");
+        });
         return view('admin.users.index',[
             'users' => $query->sortable(['id' => 'desc'])->simplePaginate(5),
         ]);

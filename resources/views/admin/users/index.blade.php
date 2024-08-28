@@ -7,6 +7,37 @@
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered">
+                        <form action="{{ route('admin.user') }}" method="GET">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="number" name="id" class="form-control" id="id"
+                                            placeholder="ID">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input type="username" name="username" class="form-control" id="username"
+                                            placeholder="Enter Username">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <select class="custom-select rounded-0" id="exampleSelectRounded0" name="is_admin">
+                                            <option hidden value="">Is Admin</option>
+                                            <option value="1">True</option>
+                                            <option value="0">False</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+
+
+                            </div>
+                        </form>
+
                         <thead>
                             <tr>
                                 <th style="width: 10px">@sortablelink('id', '#')</th>
@@ -22,14 +53,16 @@
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->is_admin ? 'True' : 'False' }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                            aria-expanded="false">
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown" aria-expanded="false">
                                             Action
                                         </button>
                                         <div class="dropdown-menu" style="">
-                                            <a class="dropdown-item" href="{{ route('admin.user.info', $user->id) }}">Edit</a>
+                                            <a class="dropdown-item"
+                                                href="{{ route('admin.user.info', $user->id) }}">Edit</a>
                                             <a class="dropdown-item" href="#">View tasks</a>
-                                            <a class="dropdown-item" href="javascript:destory('{{ $user->id }}')">Delete</a>
+                                            <a class="dropdown-item"
+                                                href="javascript:destory('{{ $user->id }}')">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -46,8 +79,8 @@
         </div>
     </section>
 
-<script>
-    function destory(id) {
+    <script>
+        function destory(id) {
             Swal.fire({
                 text: 'Are you sure to delete?',
                 icon: 'question',
@@ -80,5 +113,5 @@
                 }
             });
         }
-</script>
+    </script>
 @endsection
