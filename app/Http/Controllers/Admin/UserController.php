@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index(Request $request) {
         $query = User::query();
         $request->whenFilled('id', function ($id) use ($query) {
-            $query->where('id', 'like', "%{$id}%");
+            $query->where('id', $id);
         });
         $request->whenFilled('is_admin', function ($is_admin) use ($query) {
             $query->where('is_admin', $is_admin);
