@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Hash;
 use Illuminate\Http\Request;
 use Validator;
@@ -13,7 +14,7 @@ class UserController extends Controller
     public function index(Request $request) {
         $query = User::query();
         return view('admin.users.index',[
-            'users' => $query->sortable(['id' => 'asc'])->simplePaginate(5),
+            'users' => $query->sortable(['id' => 'desc'])->simplePaginate(5),
         ]);
     }
     public function edit(User $user) {
@@ -31,5 +32,14 @@ class UserController extends Controller
             return redirect()->back()->with('successMsg', 'Update successful!');
         }
         return redirect()->back()->withErrors('Update failed!');
+    }
+
+    public function delete(User $user) {
+        try {
+            $user->delete();
+            return $this->success('Delete successful!');
+        } catch (Exception $e) {
+            return $this->fail('Delete failed!');
+        }  
     }
 }

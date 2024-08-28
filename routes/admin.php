@@ -8,5 +8,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('user');
     Route::get('user/{user}', [UserController::class, 'edit'])->name('user.info');
     Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('user/{user}', [UserController::class, 'delete'])->name('user.delete');
     Route::get('tasks', [TodoController::class, 'index'])->name('task');
 });

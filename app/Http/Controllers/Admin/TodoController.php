@@ -14,4 +14,5 @@ class TodoController extends Controller
             'todos' => $query->sortable(['id' => 'desc'])->simplePaginate(5),
         ]);
     }
+
 }
