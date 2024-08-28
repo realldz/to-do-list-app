@@ -60,7 +60,7 @@
                                         <div class="dropdown-menu" style="">
                                             <a class="dropdown-item"
                                                 href="{{ route('admin.user.info', $user->id) }}">Edit</a>
-                                            <a class="dropdown-item" href="#">View tasks</a>
+                                            <a class="dropdown-item" href="{{ route('admin.task') }}?user={{ $user->id }}">View tasks</a>
                                             <a class="dropdown-item"
                                                 href="javascript:destory('{{ $user->id }}')">Delete</a>
                                         </div>
